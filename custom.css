@@ -1,0 +1,10 @@
+p#results {
+  border: 1px #333 solid;
+  padding: 5px;
+}
+
+p#upload {
+  border: 1px #333 solid;
+  padding: 5px;
+  background: #ccc;
+}
