@@ -37,8 +37,10 @@ function handleFiles() {
           myObjArr = Array.prototype.slice.call(node.attributes);
           myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
           text = JSON.stringify(myStrArr)
-
           output.append(text);
+
+          console.log(node.parentNode.parentElement);
+
           node = result.iterateNext();
         }
       } catch (e) {
