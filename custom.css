@@ -1,13 +1,11 @@
 p#output {
-  background: #ccc;
+
 }
 
 p#upload {
-
-
+  background: #eee;
 }
 
 p.notice {
-  border: 1px #333 solid;
-  padding: 5px;
+
 }
