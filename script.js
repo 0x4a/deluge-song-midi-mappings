@@ -36,10 +36,20 @@ function handleFiles() {
 
   var doc = new DOMParser();
   var xmlstring = doc.parseFromString(contents, "text/xml");
-  const result = xmlstring.evaluate('//midiKnob', xmlstring, null, 6, null);
-  console.log(result);
+  const result = xmlstring.evaluate('//midiKnob', xmlstring, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
 
-  output.innerText = result;
+  try {
+    let node = result.iterateNext();
+    while (node) {
+      console.log("node", node);
+      node = result.iterateNext();
+    }
+  } catch (e) {
+    console.error(`Document tree modified during iteration: ${e}`);
+  }
+
+
+//  output.innerText = result[1];
 
 }
 
