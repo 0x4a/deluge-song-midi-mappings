@@ -39,17 +39,15 @@ function handleFiles() {
           nodeText = JSON.stringify(myStrArr)
 
 
-          if(node.parentNode.parentElement.getAttribute("name") != "") {
-            nodeParent = node.parentNode.parentElement.getAttribute("name");
+          if(node.parentNode.parentElement.getAttribute("name") != null) {
+            nodeParent = "[KIT] " + node.parentNode.parentElement.getAttribute("name");
           }
           else
           {
-            nodeParent = node.parentNode.parentElement.getAttribute("presetName");
+            nodeParent = "[SYNTH] " + node.parentNode.parentElement.getAttribute("presetName");
           }
-          //console.log(node.parentNode.parentElement.getAttribute("name"));
-          //console.log(node.parentNode.parentElement.getAttribute("presetName"));
 
-          console.log(node.parentNode.parentElement);
+          //console.log(node.parentNode.parentElement);
           output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>"); 
           node = result.iterateNext();
         }
@@ -64,4 +62,3 @@ function handleFiles() {
   reader.readAsText(file);
 
 }
-

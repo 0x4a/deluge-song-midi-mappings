@@ -1,10 +1,13 @@
 p#output {
-  border: 1px #333 solid;
-  padding: 5px;
+  background: #ccc;
 }
 
 p#upload {
+
+
+}
+
+p.notice {
   border: 1px #333 solid;
   padding: 5px;
-  background: #ccc;
 }
