@@ -32,6 +32,9 @@ function handleFiles() {
         let node = result.iterateNext();
         while (node) {
           console.log("node", node);
+
+          output.append(JSON.stringify(node));
+
           node = result.iterateNext();
         }
       } catch (e) {
