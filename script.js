@@ -32,15 +32,25 @@ function handleFiles() {
         let node = result.iterateNext();
         output.innerText = "";
         while (node) {
-          console.log("node", node);
+          //console.log("node", node);
 
           myObjArr = Array.prototype.slice.call(node.attributes);
           myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
-          text = JSON.stringify(myStrArr)
-          output.append(text);
+          nodeText = JSON.stringify(myStrArr)
+
+
+          if(node.parentNode.parentElement.getAttribute("name") != "") {
+            nodeParent = node.parentNode.parentElement.getAttribute("name");
+          }
+          else
+          {
+            nodeParent = node.parentNode.parentElement.getAttribute("presetName");
+          }
+          //console.log(node.parentNode.parentElement.getAttribute("name"));
+          //console.log(node.parentNode.parentElement.getAttribute("presetName"));
 
           console.log(node.parentNode.parentElement);
-
+          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>"); 
           node = result.iterateNext();
         }
       } catch (e) {
