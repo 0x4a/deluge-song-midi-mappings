@@ -30,11 +30,15 @@ function handleFiles() {
     
       try {
         let node = result.iterateNext();
+        output.innerText = "";
         while (node) {
           console.log("node", node);
 
-          output.append(JSON.stringify(node));
+          myObjArr = Array.prototype.slice.call(node.attributes);
+          myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
+          text = JSON.stringify(myStrArr)
 
+          output.append(text);
           node = result.iterateNext();
         }
       } catch (e) {
