@@ -36,16 +36,33 @@ function handleFiles() {
           myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
           nodeText = JSON.stringify(myStrArr)
           
-          if(node.parentNode.parentElement.getAttribute("name") != null) {
-            nodeParent = "[KIT] " + node.parentNode.parentElement.getAttribute("name");
+          if (node.parentNode.parentElement.getAttribute("name") != null) {
+            nodeParent = "[Kit] " + node.parentNode.parentElement.getAttribute("name");
           }
-          else
-          {
-            nodeParent = "[SYNTH] " + node.parentNode.parentElement.getAttribute("presetName");
+          else if (node.parentNode.parentElement.getAttribute("presetName") != null) {
+            nodeParent = "[Synth] " + node.parentNode.parentElement.getAttribute("presetName");
+          }
+          else if (node.parentNode.parentNode.nodeName == "song") {
+            nodeParent = "[Global]"
+          }
+          else {
+            nodeParent = "[???]"
           }
 
-          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>"); 
+          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>");
           //output.append("<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>"); 
+          
+          myArray = JSON.parse(nodeText);
+
+          map = new Map(myArray.map(item => {
+            const [key, value] = item.split('=');
+            return [key, isNaN(value) ? value : Number(value)]; // Convert numeric values
+          }));
+          ch = map.get("channel");
+          cc = map.get("ccNumber");
+          myKey = ch + "_" + cc
+          console.log("ch = " + ch + " cc = " + cc);
+
           node = result.iterateNext();
         }
       } catch (e) {
