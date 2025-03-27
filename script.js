@@ -49,20 +49,21 @@ function handleFiles() {
             nodeParent = "[???]"
           }
 
-          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>");
-          //output.append("<strong>" + nodeParent + ":</strong> " + nodeText + "<br><br>"); 
           
-          myArray = JSON.parse(nodeText);
-
-          map = new Map(myArray.map(item => {
+          map = new Map(JSON.parse(nodeText).map(item => {
             const [key, value] = item.split('=');
             return [key, isNaN(value) ? value : Number(value)]; // Convert numeric values
           }));
           ch = map.get("channel");
           cc = map.get("ccNumber");
+          
           myKey = ch + "_" + cc
+          // console.log("tpl: " + saved_map.get("16_78"));
           console.log("ch = " + ch + " cc = " + cc);
+          
+          mapping = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>"
 
+          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong><br>" + mapping + "<br><br>");
           node = result.iterateNext();
         }
       } catch (e) {

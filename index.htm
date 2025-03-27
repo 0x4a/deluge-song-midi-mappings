@@ -10,23 +10,30 @@
 </head>
 <body>
   <header>
-    <p>extract midi mappings from deluge song xml</p>
+    <h3>extract midi mappings from deluge song xml</h3>
   </header>
 
   <main>
+    <aside>
+      <p>soon: name mapped controls</p>
+    </aside>
+    <p>
     <input type="file" id="loadfile" /><br>
     <br>
     <div class="notice">
-    <span id="output">
-      here be results
-    </span>
-  </div>
+      <span id="output">
+        waiting for file...
+      </span>
+    </div>
   </main>
 
-  <p id="upload" class="notice">
-    <small>only does kits and synths at this point.<br>
-    <em>possible features: upload multiple files, export to CSV, name your CCs</em></small>
-  </p>
+  <details>
+    <summary>readme</summary>
+    <p>
+      <small>only does kits and synths at this point.<br>
+      <em>possible features: upload multiple files, export to CSV, name your CCs</em></small>
+    </p>
+  </details>
 
   <footer>
     <p>code available on <a href="https://github.com/0x4a/deluge-song-midi-mappings" target="_blank">github</a>.</p>
