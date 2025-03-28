@@ -1,0 +1,8 @@
+p.mapping_main {
+  margin: 0 0 0.5rem 0;
+}
+
+.mapping_found {
+  color: var(--accent);
+  float: right;
+}

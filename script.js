@@ -9,6 +9,15 @@ uploadButton.value = "";
 
 uploadButton.addEventListener("change", handleFiles, false);
 
+//var savestate = JSON.parse(localStorage.getItem('midi-mappings'));
+
+var savestate = ["16_78=lcxl_fad02","16_79=lcxl_fad03","16_80=lcxl_fad04","16_81=lcxl_fad05"];
+
+var saved_map = new Map(savestate.map(item => {
+  const [key, value] = item.split('=');
+  return [key, isNaN(value) ? value : Number(value)]; // Convert numeric values
+}));
+
 function handleFiles() {
   var file = this.files[0];
 
@@ -48,22 +57,26 @@ function handleFiles() {
           else {
             nodeParent = "[???]"
           }
-
           
           map = new Map(JSON.parse(nodeText).map(item => {
             const [key, value] = item.split('=');
             return [key, isNaN(value) ? value : Number(value)]; // Convert numeric values
           }));
-          ch = map.get("channel");
+          ch = map.get("channel") + 1;
           cc = map.get("ccNumber");
+          param = map.get("controlsParam");
           
-          myKey = ch + "_" + cc
-          // console.log("tpl: " + saved_map.get("16_78"));
-          console.log("ch = " + ch + " cc = " + cc);
-          
-          mapping = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>"
+          myKey = ch + "_" + cc;
+          if (saved_map.get(myKey)) {
+            found_mapping = "<span class='mapping_found'> --> " + saved_map.get(myKey) + "</span>";
+          }
+           else {
+            found_mapping = "<span class='mapping_found'> --> ?</span>";
+           }
 
-          output.insertAdjacentHTML("afterend", "<strong>" + nodeParent + ":</strong><br>" + mapping + "<br><br>");
+          mapping_text = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>";
+          
+          output.insertAdjacentHTML("afterend", "<p class='mapping_main'><strong>" + nodeParent + ":</strong> <mark>" + param + "</mark>" + found_mapping +"</p>" + mapping_text + "<br><hr>");
           node = result.iterateNext();
         }
       } catch (e) {
