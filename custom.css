@@ -10,3 +10,12 @@ p.mapping_main {
 p > mark {
   float: right;
 }
+
+#loadfile {
+  display: none;
+}
+
+#loaded_file {
+  font-style: italic;
+  padding-left: 1rem
+}

@@ -6,7 +6,6 @@
 const uploadButton = document.getElementById("loadfile");
 contents = "";
 uploadButton.value = "";
-
 uploadButton.addEventListener("change", handleFiles, false);
 
 //var savestate = JSON.parse(localStorage.getItem('midi-mappings'));
@@ -21,6 +20,7 @@ var saved_map = new Map(savestate.map(item => {
 function handleFiles() {
   var file = this.files[0];
 
+  // no valid file
   if (!file.type.endsWith("xml")) {
     alert("not an XML file");
     this.value = "";
@@ -39,17 +39,30 @@ function handleFiles() {
       
       try {
         let node = result.iterateNext();
-        
+
+        // empty output of loaded file if exists
+        if (typeof loaded_file !== 'undefined') {
+          loaded_file.innerHTML = "";
+        }
+
+        // output loaded file
+        the_button.insertAdjacentHTML("afterend", "<span id='loaded_file'>loaded file: " + file.name + "</span>");
+
+        // empty main output
         output.innerHTML = "<span id=\"target\"></span>";
+
+        // no mapping found error
         if (!node) {
           target.insertAdjacentHTML("afterend", "No MIDI mappings found in file <code>" + file.name + "</code><br");
         }
 
+        // iterate nodes
         while (node) {
           myObjArr = Array.prototype.slice.call(node.attributes);
           myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
           nodeText = JSON.stringify(myStrArr)
           
+          // decide instrument type
           if (node.parentNode.parentElement.getAttribute("name") != null) {
             title = "[Kit] " + node.parentNode.parentNode.parentNode.parentNode.getAttribute("presetName") + " - " + node.parentNode.parentElement.getAttribute("name");
           }
@@ -63,24 +76,28 @@ function handleFiles() {
             title = "[???]"
           }
           
+          // map over node contents
           map = new Map(JSON.parse(nodeText).map(item => {
             const [key, value] = item.split('=');
             return [key, isNaN(value) ? value : Number(value)]; // Convert numeric values
           }));
+
+          // get needed parameters
           ch = map.get("channel") + 1;
           cc = map.get("ccNumber");
           param = map.get("controlsParam");
+          mapping_text = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>";
           
+          // search saved mappings
           myKey = ch + "_" + cc;
           if (saved_map.get(myKey)) {
             found_mapping = "<span class='mapping_found'> --> " + saved_map.get(myKey) + "</span>";
           }
-           else {
+          else {
             found_mapping = "<span class='mapping_found'> ???</span>";
-           }
-
-          mapping_text = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>";
+          }
           
+          // output instrument mapping
           target.insertAdjacentHTML("afterend", "<p class='mapping_main'><strong>" + title + ":</strong> <mark>" + param + "</mark></p>" + mapping_text + found_mapping + "<br><hr>");
           node = result.iterateNext();
         }
@@ -90,7 +107,6 @@ function handleFiles() {
     },
     false,
   );
-
   console.log("loading file: " + file.name + "\ntype: " + file.type);
   reader.readAsText(file);
 }
