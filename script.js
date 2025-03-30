@@ -39,23 +39,28 @@ function handleFiles() {
       
       try {
         let node = result.iterateNext();
-        output.innerText = "";
+        
+        output.innerHTML = "<span id=\"target\"></span>";
+        if (!node) {
+          target.insertAdjacentHTML("afterend", "No MIDI mappings found in file <code>" + file.name + "</code><br");
+        }
+
         while (node) {
           myObjArr = Array.prototype.slice.call(node.attributes);
           myStrArr = myObjArr.map(function(item){return item.name+'='+item.value})
           nodeText = JSON.stringify(myStrArr)
           
           if (node.parentNode.parentElement.getAttribute("name") != null) {
-            nodeParent = "[Kit] " + node.parentNode.parentElement.getAttribute("name");
+            title = "[Kit] " + node.parentNode.parentNode.parentNode.parentNode.getAttribute("presetName") + " - " + node.parentNode.parentElement.getAttribute("name");
           }
           else if (node.parentNode.parentElement.getAttribute("presetName") != null) {
-            nodeParent = "[Synth] " + node.parentNode.parentElement.getAttribute("presetName");
+            title = "[Synth] " + node.parentNode.parentElement.getAttribute("presetName");
           }
           else if (node.parentNode.parentNode.nodeName == "song") {
-            nodeParent = "[Global]"
+            title = "[Global]"
           }
           else {
-            nodeParent = "[???]"
+            title = "[???]"
           }
           
           map = new Map(JSON.parse(nodeText).map(item => {
@@ -71,12 +76,12 @@ function handleFiles() {
             found_mapping = "<span class='mapping_found'> --> " + saved_map.get(myKey) + "</span>";
           }
            else {
-            found_mapping = "<span class='mapping_found'> --> ?</span>";
+            found_mapping = "<span class='mapping_found'> ???</span>";
            }
 
           mapping_text = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>";
           
-          output.insertAdjacentHTML("afterend", "<p class='mapping_main'><strong>" + nodeParent + ":</strong> <mark>" + param + "</mark>" + found_mapping +"</p>" + mapping_text + "<br><hr>");
+          target.insertAdjacentHTML("afterend", "<p class='mapping_main'><strong>" + title + ":</strong> <mark>" + param + "</mark></p>" + mapping_text + found_mapping + "<br><hr>");
           node = result.iterateNext();
         }
       } catch (e) {

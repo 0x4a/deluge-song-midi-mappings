@@ -6,3 +6,7 @@ p.mapping_main {
   color: var(--accent);
   float: right;
 }
+
+p > mark {
+  float: right;
+}
