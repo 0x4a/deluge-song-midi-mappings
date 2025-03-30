@@ -31,6 +31,7 @@ details.named_mappings {
 
 .named_mappings p {
   display: flex;
+  flex-direction: row;
   margin: 0;
 }
 
@@ -47,5 +48,14 @@ details.named_mappings {
 .named_mappings td {
   border: none;
   padding: 0;
+  font-size: 0.8rem;
 }
 
+.named_mappings > label.button {
+  font-size: 0.8rem;
+}
+
+
+p.controls {
+  margin: 0;
+}

@@ -10,7 +10,15 @@ uploadButton.addEventListener("change", handleFiles, false);
 
 //var savestate = JSON.parse(localStorage.getItem('midi-mappings'));
 
-var savestate = ["16_78=lcxl_fad02","16_79=lcxl_fad03","16_80=lcxl_fad04","16_81=lcxl_fad05"];
+var savestate = [
+  "16_14=lcxl_T2Pot1","16_30=lcxl_T2Pot2","16_50=lcxl_T2Pot3","16_78=lcxl_T2Fader",
+  "16_15=lcxl_T3Pot1","16_31=lcxl_T3Pot2","16_51=lcxl_T3Pot3","16_79=lcxl_T3Fader",
+  "16_16=lcxl_T4Pot1","16_32=lcxl_T4Pot2","16_52=lcxl_T4Pot3","16_80=lcxl_T4Fader",
+  "16_17=lcxl_T5Pot1","16_33=lcxl_T5Pot2","16_53=lcxl_T5Pot3","16_81=lcxl_T5Fader",
+  "16_18=lcxl_T6Pot1","16_34=lcxl_T6Pot2","16_54=lcxl_T6Pot3","16_82=lcxl_T6Fader",
+  "16_19=lcxl_T7Pot1","16_35=lcxl_T7Pot2","16_55=lcxl_T7Pot3","16_83=lcxl_T7Fader",
+  "16_20=lcxl_T8Pot1","16_36=lcxl_T8Pot2","16_56=lcxl_T8Pot3","16_84=lcxl_T8Fader"
+  ];
 
 var saved_map = new Map(savestate.map(item => {
   const [key, value] = item.split('=');
