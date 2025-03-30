@@ -19,3 +19,33 @@ p > mark {
   font-style: italic;
   padding-left: 1rem
 }
+
+aside {
+  padding: 0;
+}
+
+details.named_mappings {
+  border: none;
+  margin: 0;
+}
+
+.named_mappings p {
+  display: flex;
+  margin: 0;
+}
+
+.named_mappings input {
+  padding: 0;
+  width: 5rem;
+  margin: 0 0 0 0.5rem;
+}
+
+.named_mappings table {
+  margin: 0;
+}
+
+.named_mappings td {
+  border: none;
+  padding: 0;
+}
+
