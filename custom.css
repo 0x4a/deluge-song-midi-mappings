@@ -16,7 +16,6 @@ p > mark {
 }
 
 #loaded_file {
-  font-style: italic;
   padding-left: 1rem
 }
 
@@ -27,6 +26,7 @@ aside {
 details.named_mappings {
   border: none;
   margin: 0;
+  background-color: #EDFFE5;
 }
 
 .named_mappings p {
@@ -37,7 +37,7 @@ details.named_mappings {
 
 .named_mappings input {
   padding: 0;
-  width: 5rem;
+  width: 100%;
   margin: 0 0 0 0.5rem;
 }
 
@@ -55,7 +55,28 @@ details.named_mappings {
   font-size: 0.8rem;
 }
 
+.named_mappings > summary {
+  padding: .5rem .9rem;
+}
 
 p.controls {
   margin: 0;
+}
+
+label.button {
+  padding: .5rem .9rem;
+}
+
+#output.notice {
+  border: 1px solid var(--border);
+}
+
+.readme {
+  background-color: #eee;
+}
+
+#add_mapping.button  {
+  padding: 0.1rem 0;
+  width: 100%;
+  text-align: center;
 }

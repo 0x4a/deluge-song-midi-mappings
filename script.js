@@ -54,14 +54,14 @@ function handleFiles() {
         }
 
         // output loaded file
-        the_button.insertAdjacentHTML("afterend", "<span id='loaded_file'>loaded file: " + file.name + "</span>");
+        the_button.insertAdjacentHTML("afterend", "<span id='loaded_file'>loaded file: <em>" + file.name + "</em></span>");
 
         // empty main output
         output.innerHTML = "<span id=\"target\"></span>";
 
         // no mapping found error
         if (!node) {
-          target.insertAdjacentHTML("afterend", "No MIDI mappings found in file <code>" + file.name + "</code><br");
+          target.insertAdjacentHTML("afterend", "No MIDI mappings found!<br>");
         }
 
         // iterate nodes
@@ -99,10 +99,10 @@ function handleFiles() {
           // search saved mappings
           myKey = ch + "_" + cc;
           if (saved_map.get(myKey)) {
-            found_mapping = "<span class='mapping_found'> --> " + saved_map.get(myKey) + "</span>";
+            found_mapping = "<span class='mapping_found'>--> " + saved_map.get(myKey) + "</span>";
           }
           else {
-            found_mapping = "<span class='mapping_found'> ???</span>";
+            found_mapping = "<span class='mapping_found'>???</span>";
           }
           
           // output instrument mapping
@@ -112,6 +112,7 @@ function handleFiles() {
       } catch (e) {
         console.error(`Document tree modified during iteration: ${e}`);
       }
+      // todo: sort elements
     },
     false,
   );
