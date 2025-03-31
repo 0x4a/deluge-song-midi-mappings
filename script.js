@@ -113,6 +113,8 @@ function handleFiles() {
         console.error(`Document tree modified during iteration: ${e}`);
       }
       // todo: sort elements
+      // todo: make divs more elegant, append via bla.innerHTML = bla.innerHTML + foobar
+      // un-float paramter and controller
     },
     false,
   );
