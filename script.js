@@ -40,7 +40,6 @@ function handleFiles() {
     "load",
     () => {
       contents = reader.result;
-
       var doc = new DOMParser();
       var xmlstring = doc.parseFromString(contents, "text/xml");
       const result = xmlstring.evaluate('//midiKnob', xmlstring, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
@@ -48,20 +47,15 @@ function handleFiles() {
       try {
         let node = result.iterateNext();
 
-        // empty output of loaded file if exists
-        if (typeof loaded_file !== 'undefined') {
-          loaded_file.innerHTML = "";
-        }
-
         // output loaded file
-        the_button.insertAdjacentHTML("afterend", "<span id='loaded_file'>loaded file: <em>" + file.name + "</em></span>");
+        loaded_file.innerHTML = "<small>loaded file: <em>" + file.name + "</em></small>"
 
         // empty main output
-        output.innerHTML = "<span id=\"target\"></span>";
+        output.innerHTML = "";
 
         // no mapping found error
         if (!node) {
-          target.insertAdjacentHTML("afterend", "No MIDI mappings found!<br>");
+          output.innerHTML = "No MIDI mappings found!<br>";
         }
 
         // iterate nodes
@@ -94,7 +88,8 @@ function handleFiles() {
           ch = map.get("channel") + 1;
           cc = map.get("ccNumber");
           param = map.get("controlsParam");
-          mapping_text = "<code>CH: </code><kbd>" + ch + "</kbd><code> CC: </code><kbd>" + cc + "</kbd>";
+          mapping_text =  "<code>CH:</code><kbd>" + ch + "</kbd> " + 
+                          "<code>CC:</code><kbd>" + cc + "</kbd>";
           
           // search saved mappings
           myKey = ch + "_" + cc;
@@ -106,15 +101,14 @@ function handleFiles() {
           }
           
           // output instrument mapping
-          target.insertAdjacentHTML("afterend", "<p class='mapping_main'><strong>" + title + ":</strong> <mark>" + param + "</mark></p>" + mapping_text + found_mapping + "<br><hr>");
+          output.innerHTML = output.innerHTML + "<p class='mapping_main'><strong>" + title + ":</strong> <mark>" + param + "</mark></p><p class='mapping_details'>" + mapping_text + found_mapping + "<br></p><hr>"
           node = result.iterateNext();
         }
       } catch (e) {
         console.error(`Document tree modified during iteration: ${e}`);
       }
       // todo: sort elements
-      // todo: make divs more elegant, append via bla.innerHTML = bla.innerHTML + foobar
-      // un-float paramter and controller
+      // un-float parameter and controller
     },
     false,
   );

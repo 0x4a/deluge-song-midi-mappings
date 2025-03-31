@@ -33,7 +33,6 @@
           </tr>
         </table>
         <label class="button" id="add_mapping">add</label>
-        </p>
         <hr>
         <span class="saved_mappings"><em><small>no saved mappings</small></em></span>
       </details>
@@ -42,11 +41,10 @@
     <p class="controls">
     <input type="file" id="loadfile" />
     <label class="button" for="loadfile" id="the_button">load file</label>
+    <span id="loaded_file"></span>
     <br>
     <div class="notice" id="output">
-      <span id="target">
-        waiting for file...
-      </span>
+      waiting for file...
     </div>
   </main>
 
@@ -56,7 +54,7 @@
       <small>Loads <code>midiKnobs</code> from song XML.<br>
       Show synth or kit name and parameter for each mapping.<br><br>
       <u>coming soon:</u> name your controls. sort mappings.<br><br>
-      <em>possible future features: upload multiple files, export to CSV, name your CCs</em></small>
+      <em>possible future features: upload multiple files, export to CSV</em></small>
     </p>
   </details>
 
