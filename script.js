@@ -66,10 +66,10 @@ function handleFiles() {
           
           // decide instrument type
           if (node.parentNode.parentElement.getAttribute("name") != null) {
-            title = "[Kit] " + node.parentNode.parentNode.parentNode.parentNode.getAttribute("presetName") + " - " + node.parentNode.parentElement.getAttribute("name");
+            title = "[Kit]&nbsp;" + node.parentNode.parentNode.parentNode.parentNode.getAttribute("presetName") + " - " + node.parentNode.parentElement.getAttribute("name");
           }
           else if (node.parentNode.parentElement.getAttribute("presetName") != null) {
-            title = "[Synth] " + node.parentNode.parentElement.getAttribute("presetName");
+            title = "[Synth]&nbsp;" + node.parentNode.parentElement.getAttribute("presetName");
           }
           else if (node.parentNode.parentNode.nodeName == "song") {
             title = "[Global]"

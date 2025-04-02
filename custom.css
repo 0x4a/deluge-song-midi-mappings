@@ -1,18 +1,20 @@
 p.mapping_main {
   margin: 0 0 0.5rem 0;
+  display: flex;
 }
 
 p.mapping_details {
   margin: 0;
+  display: flex;
 }
 
 .mapping_found {
   color: var(--accent);
-  float: right;
+  margin-left: auto;
 }
 
 p > mark {
-  float: right;
+  margin-left: auto;
 }
 
 #loadfile {
